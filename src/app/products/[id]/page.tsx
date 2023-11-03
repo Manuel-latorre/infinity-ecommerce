@@ -1,7 +1,7 @@
 
 
 import { Product } from "../page";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+
 
 
 async function fetchProduct(_id: Product) {
