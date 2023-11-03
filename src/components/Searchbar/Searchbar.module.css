@@ -1,0 +1,25 @@
+.searchbarComponent{
+    background-color: rgb(255, 255, 255);
+    color: black;
+    width: 400px;
+    display: flex;
+    gap: 10px;
+    
+}
+
+.searchbar{
+    background-color: white;
+    color: black;
+    width: 400px;
+    padding: 10px;
+}
+
+.result{
+    display:flex;
+    align-items:center;
+    gap:10px; 
+    margin:5px;
+    justify-content:space-around;
+    border-bottom: solid 1px rgba(128, 128, 128, 0.276);
+    padding: 5px;
+}

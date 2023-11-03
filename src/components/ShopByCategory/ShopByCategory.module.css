@@ -1,0 +1,190 @@
+.categories{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin: 100px;
+}
+
+.title{
+    font-size: 80px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.textCard{
+    font-size: 50px;
+    letter-spacing: 4px;
+}
+
+/* Estilos iniciales para ocultar el botón */
+.swiperSlideTeclados .button {
+    display: none;
+  }
+  
+  /* Estilos cuando se hace hover en la tarjeta */
+  .swiperSlideTeclados:hover .button {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+  }
+  
+  .swiperSlideTeclados:hover .textCard {
+    display: none; /* Ocultar el texto en hover */
+  }
+
+  /* .textCard{
+    font-size: 60px;
+    font-weight: bolder;
+    background: linear-gradient(135deg, #ff1d1d, #ff6f00, rgb(255, 208, 0), #00ffb3,#4800ff, #ee00ff, #ff0095, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 300% 300%;
+    animation: gradient 8s ease-in-out infinite;
+} */
+
+
+@keyframes gradient {
+    0%{
+        background-position: 0% 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0% 50%;
+    }
+}
+
+  
+
+
+
+.swiperSlideTeclados{
+    border: solid 5px pink;
+    width: 500px;
+    height: 350px;
+    border-radius: 20px;
+    transition: 0.5s;
+    background-image: url('../assets/teclado2.png');
+    background-color: rgba(0, 0, 0, 0.627);
+    background-blend-mode: darken;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.swiperSlideAuriculares{
+    border: solid 5px rgb(109, 0, 252);
+    width: 500px;
+    height: 350px;
+    border-radius: 20px;
+    transition: 0.5s;
+    background-image: url('../assets/auriculares.png');
+    background-color: rgba(0, 0, 0, 0.627);
+    background-blend-mode: darken;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.swiperSlideAuriculares .button {
+    display: none;
+}
+
+/* Estilos cuando se hace hover en la tarjeta */
+.swiperSlideAuriculares:hover .button {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+
+.swiperSlideAuriculares:hover .textCard {
+    display: none; /* Ocultar el texto en hover */
+}
+
+
+
+.swiperSlideMouses{
+    border: solid 5px red;
+    width: 500px;
+    height: 350px;
+    border-radius: 20px;
+    transition: 0.5s;
+    background-image: url('../assets/mouse1.png');
+    background-color: rgba(0, 0, 0, 0.627);
+    background-blend-mode: darken;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.swiperSlideMouses .button {
+    display: none;
+}
+
+/* Estilos cuando se hace hover en la tarjeta */
+.swiperSlideMouses:hover .button {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+
+.swiperSlideMouses:hover .textCard {
+    display: none; /* Ocultar el texto en hover */
+  }
+  
+  
+  
+  .swiperSlideMousepads{
+    border: solid 5px blue;
+    width: 500px;
+    height: 350px;
+    border-radius: 20px;
+    transition: 0.5s;
+    background-image: url('../assets/mousepad.png');
+    background-color: rgba(0, 0, 0, 0.627);
+    background-blend-mode: darken;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+    
+
+.swiperSlideMousepads .button {
+    display: none;
+}
+
+/* Estilos cuando se hace hover en la tarjeta */
+.swiperSlideMousepads:hover .button {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+
+.swiperSlideMousepads:hover .textCard {
+    display: none; /* Ocultar el texto en hover */
+}
+
+
+.swiperSlide{
+    background: transparent;
+}
+
+.mySwiper{
+    padding: 20px;
+    border-radius: 20px;
+}
+
+
+
+
+
+
+
+
+  

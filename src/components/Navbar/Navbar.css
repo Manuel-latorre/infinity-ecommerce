@@ -9,6 +9,13 @@
     background-color: black;
 }
 
+.searchbarContainer{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    margin: 10px;
+}
+
 .nav_items{
     display: flex;
 }
@@ -185,3 +192,23 @@
         transition: none;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

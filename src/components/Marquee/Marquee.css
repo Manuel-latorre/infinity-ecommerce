@@ -1,0 +1,21 @@
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 10px;
+    background-color: rgb(23, 23, 23);
+  }
+  
+  .marquee-text {
+    white-space: nowrap;
+    animation: marquee 40s linear infinite;
+  }
+  
+  @keyframes marquee {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  

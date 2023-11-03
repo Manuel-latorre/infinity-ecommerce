@@ -1,9 +1,10 @@
-'use client'
+ 'use client'
 
-import React, { useEffect, useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
-import Autosuggest from 'react-autosuggest';
-import Link from 'next/link';
+ import React, { useEffect, useState } from 'react';
+ import axios, { AxiosResponse } from 'axios';
+ import Autosuggest from 'react-autosuggest';
+ import Link from 'next/link';
+ import style from './Searchbar.module.css'
 
 
 
@@ -12,12 +13,10 @@ interface Product {
     name: string;
     imageCard: string
   }
-  
   export default function SearchBar() {
     const [searchQuery, setSearchQuery] = useState('');
     const [products, setProducts] = useState<Product[]>([]);
     const [suggestions, setSuggestions] = useState<Product[]>([]);
-  
     const handleSearch = async (value: string) => {
       setSearchQuery(value);
       try {
@@ -27,31 +26,26 @@ interface Product {
         console.error('Error al buscar productos por nombre:', error);
       }
     }
-  
     const getSuggestions = (value: string) => {
       const inputValue = value.trim().toLowerCase();
       const inputLength = inputValue.length;
-  
       return inputLength === 0 ? [] : products.filter(
         product => product.name.toLowerCase().slice(0, inputLength) === inputValue
       );
     };
-  
     const renderSuggestion = (suggestion: Product) => (
         <Link href={`/products/${suggestion._id}`}>
-            <div style={{display:'flex', alignItems:'center', gap:10}}>
+            <div className={style.result}>
                   {suggestion.name}
                   <img width={80} src={suggestion.imageCard} alt="" />
             </div>
         </Link>
-    );
-
+    )
     useEffect(() => {
         handleSearch('');
     }, [])
-  
     return (
-      <div>
+      <div className={style.searchbarComponent}>
         <Autosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={({ value }) => {
@@ -63,15 +57,14 @@ interface Product {
           getSuggestionValue={(suggestion) => suggestion.name}
           renderSuggestion={renderSuggestion}
           inputProps={{
-            placeholder: 'Buscar productos',
+            placeholder: 'Buscar...',
             value: searchQuery,
             onChange: (e, { newValue }) => {
               handleSearch(newValue);
             },
+            className: style.searchbar
           }}
         />
       </div>
     );
   }
-
-
