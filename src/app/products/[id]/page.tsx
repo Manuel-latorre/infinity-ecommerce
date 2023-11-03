@@ -10,7 +10,7 @@ async function fetchProduct(_id: Product) {
     
 }
 
-export default async function DetailProduct({ params }: Params) {
+export default async function DetailProduct({ params }: any) {
     const { id } = params;
     const prod = await fetchProduct(id)
 
