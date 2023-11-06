@@ -88,7 +88,7 @@ export default function NewIn (){
                 >
             {
                 teclados.map((prod) => (
-                    <SwiperSlide className={style.swiperNewIn}>
+                    <SwiperSlide key={prod._id} className={style.swiperNewIn}>
                         <ProductNewIn key={prod._id} product={prod}/>
                     </SwiperSlide>
                     
