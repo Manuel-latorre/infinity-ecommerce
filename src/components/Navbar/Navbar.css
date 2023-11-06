@@ -7,13 +7,21 @@
     z-index: 10;
     position: sticky;
     background-color: black;
+    
+}
+
+.navbarContainer{
+    z-index: 10;
+    position: sticky;
+    top: 0;
 }
 
 .searchbarContainer{
     display: flex;
     justify-content: center;
     padding: 10px;
-    margin: 10px;
+   
+    background-color: black;
 }
 
 .nav_items{
@@ -105,6 +113,7 @@
     position: relative;
     text-decoration: none;
     transition: 0.5s;
+    text-transform: uppercase;
 }
 
 .nav_items a:hover{
@@ -196,7 +205,16 @@
 
 
 
+@media(max-width:642px){
+    .signSection{
+        display: flex;
+        flex-direction: column;
+    }
 
+    .logo{
+        width: 150px;
+    }
+}
 
 
 

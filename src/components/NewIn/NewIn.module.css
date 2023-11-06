@@ -1,0 +1,59 @@
+.title{
+    font-size: 50px;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.container{
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: solid 1px gray;
+    padding: 10px;
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    border-radius: 5px;
+    width: 300px;
+    height: 350px;
+}
+
+
+
+.brandLogo{
+    align-self: flex-end;
+}
+
+.swiperNewIn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #030303;
+    
+    
+}
+
+.swiperNewIn .cardImage{
+    width: 230px;
+}
+
+.swiperNewIn .brandLogo{
+    width: 60px;
+}
+
+
+@media(max-width:755px){
+    .title{
+        font-size: 30px;
+    }
+}
+

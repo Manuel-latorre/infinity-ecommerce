@@ -32,13 +32,13 @@ const Navbar = () => {
 
                     <div>
                         <a href="/">
-                        <Image  className='logo' src={logo} alt="" />
+                        <Image  className='logo' src={logo} alt="logo" />
                         </a>
                     </div>
 
                     <div  className={`nav_items ${isOpen && 'open'}`}>
                         <Link href='/'>
-                          Inico
+                          Inicio
                         </Link>
                         <Link href='/teclados'>
                           Teclados
@@ -91,13 +91,13 @@ const Navbar = () => {
                     </div>
                 </div>
                 ) : (
-                  <div>
-                    <Button style={{margin:5}} as={Link} color="primary" href="/login" variant="flat">
-                      Sign In
+                  <div className='signSection'>
+                    <Button style={{margin:5}} as={Link} color="success" href="/login" variant="flat">
+                      Ingresar
                     </Button>
 
-                    <Button style={{margin:5}} as={Link} color="warning" href="/register" variant="flat">
-                      Sign Up
+                    <Button style={{margin:5}} as={Link} color="primary" href="/register" variant="flat">
+                      Registrarse
                     </Button>
                   </div>
                 )

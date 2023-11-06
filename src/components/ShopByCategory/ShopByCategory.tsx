@@ -21,10 +21,15 @@ export default function ShopByCategory(){
         <div className={spartan.className} style={{margin:100}}>
             <p className={style.title}>Explora por categorías</p>
             <Swiper
-                slidesPerView={3}
+                slidesPerView={1}
                 autoplay={{
                     delay: 2000,
                     disableOnInteraction: false,
+                }}
+                breakpoints={{
+                    1521:{
+                        slidesPerView:3
+                    }
                 }}
                 spaceBetween={30}
                 modules={[Autoplay]}
