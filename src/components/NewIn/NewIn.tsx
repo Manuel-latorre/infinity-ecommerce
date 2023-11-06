@@ -29,7 +29,7 @@ export interface Product {
 }
 
 async function fetchProducts(): Promise<Product[]> {
-    const response = await fetch('https://dark-red-gharial-suit.cyclic.app/products');
+    const response = await fetch('https://api-ecommerce-kappa.vercel.app/products');
     const data = await response.json();
     console.log(data);
     return data.products as Product[]; 

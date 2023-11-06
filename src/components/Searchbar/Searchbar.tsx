@@ -20,7 +20,7 @@ interface Product {
     const handleSearch = async (value: string) => {
       setSearchQuery(value);
       try {
-        const response = await axios.get(`https://dark-red-gharial-suit.cyclic.app/products/search?name=${value}`);
+        const response = await axios.get(`https://api-ecommerce-kappa.vercel.app/products/search?name=${value}`);
         setProducts(response.data);
       } catch (error) {
         console.error('Error al buscar productos por nombre:', error);
