@@ -3,7 +3,7 @@
 import{ useState } from 'react'
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import axios from 'axios'
-
+import style from './Button.module.css'
 
 
 export default function ButtonPay ()  {
@@ -14,7 +14,7 @@ export default function ButtonPay ()  {
 
     const createPreference = async () => {
         try {
-            const response = await axios.post("https://dark-red-gharial-suit.cyclic.app/create_preference", {
+            const response = await axios.post("https://api-ecommerce-kappa.vercel.app/create_preference", {
                 description: 'prod 1',
                 price: 100,
                 quantity: 1,
@@ -34,7 +34,7 @@ export default function ButtonPay ()  {
 
     return (
         <div>
-            <button onClick={handleBuy}>COMPRAR</button>
+            <button className={style.buttonComprar} onClick={handleBuy}>Comprar ahora</button>
             {preferenceId && <Wallet initialization={{ preferenceId }} />}
         </div>
 

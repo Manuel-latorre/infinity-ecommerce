@@ -5,6 +5,7 @@ import NewIn from "@/components/NewIn/NewIn";
 
 
 
+
 export default function HomePage (){
     return(
         <div style={{backgroundColor:'#030303'}}>
@@ -12,7 +13,6 @@ export default function HomePage (){
             <Carousel/>
             <ShopByCategory/>
             <NewIn/>
-            
         </div>
     )
 }
