@@ -68,7 +68,9 @@ export default function CartView() {
               <div>
                 {
                   products.map((prod) => (
-                    <p style={{color:'red'}}>{prod.name}</p>
+                    <div key={prod._id}>
+                      <p style={{color:'red'}}>{prod.name}</p>
+                    </div>
                   ))
                 }
               </div>
