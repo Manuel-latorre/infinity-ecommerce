@@ -6,13 +6,15 @@ import NewIn from "@/components/NewIn/NewIn";
 
 
 
+
 export default function HomePage (){
     return(
         <div style={{backgroundColor:'#030303'}}>
-            <Marquee/>
-            <Carousel/>
-            <ShopByCategory/>
-            <NewIn/>
+            
+                <Marquee/>
+                <Carousel/>
+                <ShopByCategory/>
+                <NewIn/>
         </div>
     )
 }

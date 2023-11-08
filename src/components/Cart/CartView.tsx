@@ -6,18 +6,24 @@ import Cart from "./Cart";
 import { Product } from "../NewIn/NewIn";
 
 interface Cart {
-  
-    name: string,
-    price: number,
-    imageCard: string,
-    _id: number,
-  
+      name: string,
+      price: number,
+      imageCard: string,
+      _id: string,
 }
+
 async function fetchProducts(): Promise<Cart[]> {
-  const response = await fetch('https://api-ecommerce-kappa.vercel.app/products-cart');
-  const data = await response.json();
-  console.log(data, 'DATITTA');
-  return data as Cart[] ; 
+  try {
+    const response = await fetch('https://api-ecommerce-kappa.vercel.app/products-cart');
+    if (!response.ok) {
+      throw new Error(`Failed to fetch products. Status code: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.productsCart as Cart[];
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 }
 
 
@@ -34,18 +40,29 @@ export default function CartView() {
     onOpen();
   }
 
-  useEffect(() => {
+  const refreshData = () => {
     fetchProducts()
       .then((data) => {
-        if (Array.isArray(data)) {
-          setProducts(data);
-        }
-        console.log(data, 'useffect');
+        setProducts(data);
       });
+  }
+
+  useEffect(() => {
+    refreshData(); // Initial data fetch
+
+    // Set up a periodic data refresh (e.g., every 5 seconds)
+    const refreshInterval = setInterval(refreshData, 5000); // Adjust the interval as needed
+
+    // Clean up the interval when the component unmounts
+    return () => {
+      clearInterval(refreshInterval);
+    };
   }, []);
 
 
-  
+
+  const totalItems = products.length;
+
 
   return (
     <>
@@ -55,7 +72,7 @@ export default function CartView() {
             key={b}
             onClick={() => handleOpen(b)}
           >
-           <Cart/>
+           <Cart totalItems={totalItems}/>
           </button>
         ))}  
       </div>
@@ -63,17 +80,25 @@ export default function CartView() {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">Carrito</ModalHeader>
               <ModalBody>
               <div>
-                {
+                  {
                   products.map((prod) => (
-                    <div key={prod._id}>
-                      <p style={{color:'red'}}>{prod.name}</p>
+                    <div key={prod._id} style={{display:'flex', alignItems:'center'}}>
+                      <div>
+                        <p>{prod.name}</p>
+                        <p>{prod.price}</p>
+                      </div>
+                      <div>
+                        <img width={80} src={prod.imageCard} alt={prod.name} />
+                      </div>
+                      <div>
+                        <button>hola</button>
+                      </div>
                     </div>
-                  ))
-                }
-              </div>
+                  ))}
+                </div>
               
               </ModalBody>
               <ModalFooter>
