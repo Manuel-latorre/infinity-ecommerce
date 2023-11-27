@@ -14,14 +14,14 @@
     z-index: 10;
     position: sticky;
     top: 0;
+    background-color: black;
 }
 
 .searchbarContainer{
     display: flex;
     justify-content: center;
     padding: 10px;
-   
-    background-color: black;
+    height:80px;
 }
 
 .nav_items{
@@ -35,7 +35,6 @@
     align-items: center;
     padding: 10px;
     color: white;
-    text-transform: uppercase;
     letter-spacing: 4px;
     text-decoration: none;
     font-size: 12px;
@@ -47,9 +46,9 @@
 }
 
 .btnNav:hover{
-   color: white;
-   background:  #47fff94c; 
-   box-shadow: 0 0 10px #19fff6, 0 0 40px #19fff6, 0 0 80px #19fff6;
+   color: #000000;
+   background:  rgb(103, 103, 103); 
+   box-shadow: 0 0 10px #ffffff, 0 0 40px #ffffff, 0 0 80px #ffffff;
    transition-delay: 1s;
    border: none;
    border-radius: none;
@@ -66,7 +65,7 @@
     left: -100%;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #19fff6);
+    background: linear-gradient(90deg, transparent, #ffffff);
 }
 
 .btnNav:hover span:nth-child(1){
@@ -80,7 +79,7 @@
     right: -100%;
     width: 100%;
     height: 2px;
-    background: linear-gradient(270deg, transparent, #19fff6);
+    background: linear-gradient(270deg, transparent, #ffffff);
 }
 
 .btnNav:hover span:nth-child(3){
@@ -95,11 +94,11 @@
     right: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(180deg, transparent, #19fff6);
+    background: linear-gradient(180deg, transparent, #ffffff);
 }
 
 .logo {
-    width:200px ;
+    width:150px ;
 }
 
 
@@ -113,12 +112,12 @@
     position: relative;
     text-decoration: none;
     transition: 0.5s;
-    text-transform: uppercase;
 }
 
 .nav_items a:hover{
-    background:  #47fff94c; 
-    box-shadow: 0 0 10px #19fff6, 0 0 40px #19fff6, 0 0 80px #19fff6;
+    background:  #ffffff;
+    color: #000000; 
+    box-shadow: 0 0 10px #ffffff, 0 0 40px #ffffff, 0 0 80px #ffffff;
 }
 
 .nav_toggle{

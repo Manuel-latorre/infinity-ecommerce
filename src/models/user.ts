@@ -1,4 +1,4 @@
-import { Schema, model, models  } from "mongoose";
+import mongoose, { Schema, model, models  } from "mongoose";
 
 const userSchema = new Schema({
     email: {
@@ -20,8 +20,16 @@ const userSchema = new Schema({
         required: [true, 'Fullname is required'],
         minLength: [3, 'Fullname must be at least 3 characters'],
         maxLength: [30, 'Fullname must be at least 30 characters']
-    }
-
+    },
+    cart: [
+        {
+          product: {
+            type: Schema.Types.ObjectId, // Debes ajustar el tipo según tu modelo de productos
+            ref: 'Product', // Ajusta el nombre del modelo de productos
+          },
+          quantity: Number,
+        },
+      ],
 });
 
 const User = models.User || model('User', userSchema)

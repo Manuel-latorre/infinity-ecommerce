@@ -104,7 +104,7 @@ const Navbar = () => {
               }
             </div>
             <div className='searchbarContainer'>
-              <SearchBar/>
+                <SearchBar/>
             </div>
 </nav>
     

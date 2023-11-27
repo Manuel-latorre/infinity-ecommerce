@@ -1,16 +1,25 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Popover, PopoverTrigger, PopoverContent} from "@nextui-org/react";
+import { useSession } from 'next-auth/react';
 import Cart from "./Cart";
-import { Product } from "../NewIn/NewIn";
+import style from './Cart.module.css'
 
-interface Cart {
-      name: string,
-      price: number,
-      imageCard: string,
-      _id: string,
+export interface User {
+  email: string;
+  // Otros campos de usuario
+  cart: Cart[]; // Define el tipo de datos para el carrito
 }
+
+export interface Cart {
+    name: string,
+    price: number,
+    imageCard: string,
+    _id: string,
+}
+
+
 
 async function fetchProducts(): Promise<Cart[]> {
   try {
@@ -26,13 +35,30 @@ async function fetchProducts(): Promise<Cart[]> {
   }
 }
 
+async function deleteProduct(_id: string) {
+  const res = await fetch(`https://api-ecommerce-kappa.vercel.app/products-cart/${_id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  });
+  if (res.ok) {
+    console.log('Producto eliminado del carrito.');
+  } else {
+    console.error('Error al eliminar el producto del carrito.');
+  }
+}
 
 
 export default function CartView() {
+  const { data: session } = useSession();
   const {isOpen, onOpen, onClose} = useDisclosure();
   const [backdrop, setBackdrop] = useState('opaque')
-  const [products, setProducts] = useState<Cart[]>([]);
-
+  const [products, setProducts] = useState<Cart[]>(
+    (session?.user as User)?.cart || []
+  );
+  
+  
   const backdrops = ["blur"];
   
   const handleOpen = (backdrop:any) => {
@@ -48,12 +74,10 @@ export default function CartView() {
   }
 
   useEffect(() => {
-    refreshData(); // Initial data fetch
+    refreshData();
 
-    // Set up a periodic data refresh (e.g., every 5 seconds)
-    const refreshInterval = setInterval(refreshData, 5000); // Adjust the interval as needed
+    const refreshInterval = setInterval(refreshData, 1000); // Adjust the interval as needed
 
-    // Clean up the interval when the component unmounts
     return () => {
       clearInterval(refreshInterval);
     };
@@ -63,10 +87,20 @@ export default function CartView() {
 
   const totalItems = products.length;
 
+  const handleDeleteProduct = async (_id: string) => {
+    await deleteProduct(_id);
+    // Después de eliminar un producto, actualiza la vista del carrito.
+    refreshData();
+  }
 
+  const calculateTotal = () => {
+    const totalPrice = products.reduce((acc, prod) => acc + prod.price, 0);
+    return totalPrice.toFixed(2); // Redondear a dos decimales
+  };
+  
   return (
     <>
-      <div className="flex flex-wrap gap-3">
+      <div>
         {backdrops.map((b) => (
           <button  
             key={b}
@@ -76,28 +110,34 @@ export default function CartView() {
           </button>
         ))}  
       </div>
-      <Modal backdrop='blur' isOpen={isOpen} onClose={onClose}>
+      <Modal backdrop='blur' isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Carrito</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">Mi Carrito</ModalHeader>
               <ModalBody>
               <div>
                   {
                   products.map((prod) => (
-                    <div key={prod._id} style={{display:'flex', alignItems:'center'}}>
+                    <div key={prod._id} className={style.cartView}>
                       <div>
                         <p>{prod.name}</p>
-                        <p>{prod.price}</p>
+                        <p>${prod.price}</p>
                       </div>
                       <div>
-                        <img width={80} src={prod.imageCard} alt={prod.name} />
+                        <img width={100} src={prod.imageCard} alt={prod.name} />
                       </div>
                       <div>
-                        <button>hola</button>
+                      <Button onPress={() => handleDeleteProduct(prod._id)} variant="shadow" color="danger">
+                        Quitar
+                      </Button>  
                       </div>
                     </div>
                   ))}
+                </div>
+
+                <div>
+                  <p>Total: ${calculateTotal()}</p>
                 </div>
               
               </ModalBody>
@@ -105,12 +145,15 @@ export default function CartView() {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Cerrar
                 </Button>
-                <Button color="primary" onPress={onClose}>
+                <Button color="primary">
                   Comprar
                 </Button>
               </ModalFooter>
             </>
           )}
+              
+
+              
         </ModalContent>
       </Modal>
     </>

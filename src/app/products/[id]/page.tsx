@@ -14,6 +14,7 @@ import ButtonPay from "@/components/ButtonPay/ButtonPay";
 
 
 
+
 async function fetchProduct(_id: Product) {
     return await fetch(`https://api-ecommerce-kappa.vercel.app/products/${_id}`)
     .then(res => res.json())
@@ -24,6 +25,7 @@ async function fetchProduct(_id: Product) {
 export default async function DetailProduct({ params }: any) {
     const { id } = params;
     const prod = await fetchProduct(id)
+    
     
     
     const division = prod.price / 3;
@@ -111,7 +113,7 @@ export default async function DetailProduct({ params }: any) {
                 </div>
 
             </div>
-            <div style={{width:'80%', margin:'auto', marginTop:100}}>
+            <div style={{width:'80%', margin:'auto', marginTop:100, marginBottom:100}}>
                 <p className={style.titleDescription}>Lo que tenes que saber de <b>{prod.name}</b></p>
 
                 <p style={{marginTop:20}}>{prod.description}</p>

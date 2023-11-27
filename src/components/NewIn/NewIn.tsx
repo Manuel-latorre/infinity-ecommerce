@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import { League_Spartan } from "next/font/google"
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Button, Link } from "@nextui-org/react"
 import 'swiper/css';
 import 'swiper/css/pagination';
 import style from './NewIn.module.css'
 import ProductNewIn from "./ProductNewIn";
+import Link from "next/link";
 
 export interface Product {
     _id: string,
@@ -52,7 +52,7 @@ export default function NewIn (){
 
   return(
 
-    <div className={spartan.className}>
+    <div className={spartan.className} style={{marginBottom:100, backgroundColor:'white'}}>
         <p className={style.title}>NUEVOS INGRESOS</p>
         <div className={style.container}>
             <Swiper
@@ -79,7 +79,6 @@ export default function NewIn (){
                 }}
                 autoplay={{
                     delay: 2000,
-                    disableOnInteraction: false,
                 }}
                 spaceBetween={30}
                 modules={[Autoplay]}
@@ -89,7 +88,7 @@ export default function NewIn (){
             {
                 teclados.map((prod) => (
                     <SwiperSlide key={prod._id} className={style.swiperNewIn}>
-                        <ProductNewIn key={prod._id} product={prod}/>
+                            <ProductNewIn key={prod._id} product={prod}/>
                     </SwiperSlide>
                     
                 ))

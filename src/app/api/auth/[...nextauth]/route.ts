@@ -20,13 +20,18 @@ const handler = NextAuth({
             // console.log(credentials);
             
             const userFound = await User.findOne({email: credentials?.email}).select('+password');
+            
             if(!userFound) throw new Error('User not found');
             
             const passswordMatch = await bcrypt.compare(credentials!.password, userFound.password)
 
             if(!passswordMatch) throw new Error('Incorrect password');
-
             // console.log(userFound);
+
+            if (userFound.cart && userFound.cart.length > 0) {
+              const updatedCart = userFound.cart.filter((item:any) => item._id.toString() !== 'productIdToDelete');
+              userFound.cart = updatedCart;
+            }
             
             return userFound;
         }
@@ -40,7 +45,8 @@ const handler = NextAuth({
     session({session, token}){
       session.user = token.user as any;
       return session;
-    }
+    },
+    
   },
   
   pages: {

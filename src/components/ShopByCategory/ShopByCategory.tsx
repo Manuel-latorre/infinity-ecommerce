@@ -6,9 +6,11 @@ import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Button, Link } from "@nextui-org/react"
 import { League_Spartan } from "next/font/google"
+import {ScrollShadow} from "@nextui-org/react";
 import style from './ShopByCategory.module.css'
 import 'swiper/css';
 import 'swiper/css/pagination';
+import SearchBar from '../Searchbar/Searchbar';
 
 
 
@@ -18,7 +20,7 @@ const spartan = League_Spartan({ subsets: ['latin'], weight:['700'] })
 
 export default function ShopByCategory(){
     return(
-        <div className={spartan.className} style={{margin:100}}>
+        <div className={spartan.className} style={{ backgroundColor:'black', padding:20}}>
             <p className={style.title}>Explora por categorías</p>
             <Swiper
                 slidesPerView={1}
@@ -27,8 +29,11 @@ export default function ShopByCategory(){
                     disableOnInteraction: false,
                 }}
                 breakpoints={{
-                    1521:{
+                    1321:{
                         slidesPerView:3
+                    },
+                    1000:{
+                        slidesPerView:2
                     }
                 }}
                 spaceBetween={30}
@@ -74,6 +79,7 @@ export default function ShopByCategory(){
                </SwiperSlide>
             </div>
       </Swiper>
+      
     </div>
     )
 }
