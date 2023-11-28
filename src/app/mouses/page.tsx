@@ -184,8 +184,8 @@ export default function Mouses (){
                            }
                          }}
                         
-                         min={minPrice}
-                         max={maxPrice} // Ajusta según tus necesidades
+                         minValue={minPrice}
+                         maxValue={maxPrice} // Ajusta según tus necesidades
                          label='Precio'
                          formatOptions={{style: "currency", currency: "USD"}}
                          color='foreground'
