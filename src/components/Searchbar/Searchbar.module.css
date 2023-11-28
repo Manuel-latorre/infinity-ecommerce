@@ -17,10 +17,11 @@
 }
 
 .searchbar{
-    background-color: white;
+    background-color: rgb(228, 228, 228);
     color: black;
     width: 400px;
     padding: 10px;
+    border: solid 1px rgb(80, 80, 80);
     
 }
 

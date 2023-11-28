@@ -1,3 +1,5 @@
+ 'use client'
+ 
  import React, { useEffect, useState } from 'react';
  import {ScrollShadow} from "@nextui-org/react";
  import axios from 'axios';

@@ -1,0 +1,52 @@
+.pages_container{
+    display: flex;
+    width: 95%;
+    margin: auto;
+}
+
+.filters_container{
+    width: 20%;
+    background-color: black;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    height: 580px;
+    position: sticky;
+    top: 180px;
+    color: white;
+}
+
+
+.pages{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 50px;
+    width: 90%;
+    margin: 50px;
+}
+
+.titleFilter{
+    font-size: 20px;
+    background: linear-gradient(135deg, rgb(0, 17, 255), red, lime, blue,red ,limegreen, yellow, orange);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 300% 300%;
+    animation: gradient 8s ease-in-out infinite;
+    margin-bottom: 20px;
+}
+
+
+@keyframes gradient {
+    0%{
+        background-position: 0% 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0% 50%;
+    }
+}

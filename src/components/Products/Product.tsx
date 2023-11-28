@@ -1,9 +1,8 @@
 'use client'
 
-import Link from "next/link"
-import ButtonPay from "../ButtonPay/ButtonPay"
-
-
+import style from './Product.module.css'
+import logo from '../assets/logoInfinity.svg'
+import Image from 'next/image'
 export interface ProductProps{
     product: {
         _id: string,
@@ -24,16 +23,43 @@ export interface ProductProps{
 }
 
 
+
 export default function Productos({product}:ProductProps){
+    if(product.brand === 'Logitech'){
+        return(
+            <div className={style.card}>
+  <a href={`/products/${product._id}`} className={style.cardLink}>
+    <div className={style.cardContent}>
+      <div className={style.logoContainer}>
+        <Image className={style.logo} src={logo} alt="logo" />
+        <img className={style.brandLogoLogitech} src={product.brandLogo} alt="" />
+      </div>
+      <img className={style.productImage} src={product.imageCard} alt='product'/>
+      <div className={style.textCard}>
+        <p>{product.name}</p>
+        <p>${product.price}</p>
+      </div>
+    </div>
+  </a>
+</div>
+        )
+    }
+
     return(
-        <div>
-            <img style={{width:300, height:'300'}} src={product.imageCard} alt='product'/>
-            <p>{product.name}</p>
-            <p>${product.price}</p>
-            <ButtonPay/>
-            <a href={`/products/${product._id}`}>
-             VER MAS
-            </a>
-        </div>
+        <div className={style.card}>
+  <a href={`/products/${product._id}`} className={style.cardLink}>
+    <div className={style.cardContent}>
+      <div className={style.logoContainer}>
+        <Image className={style.logo} src={logo} alt="logo" />
+        <img className={style.brandLogo} src={product.brandLogo} alt="" />
+      </div>
+      <img className={style.productImage} src={product.imageCard} alt='product'/>
+      <div className={style.textCard}>
+        <p>{product.name}</p>
+        <p>${product.price}</p>
+      </div>
+    </div>
+  </a>
+</div>
     )
 }

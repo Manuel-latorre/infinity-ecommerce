@@ -1,9 +1,10 @@
 'use client'
 
-import Productos from "@/components/Products/Product";
 import { useEffect, useState } from "react";
+import {CheckboxGroup, Checkbox, Pagination, Slider} from "@nextui-org/react";
 
-
+import Productos from "@/components/Products/Product";
+import style from '../Pages.module.css'
 export interface Product {
         _id: string,
         category: string,
@@ -33,6 +34,12 @@ async function fetchProducts(): Promise<Product[]> {
 export default function Auriculares (){
 
     const [products, setProducts] = useState<Product[]>([]);
+    const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+    const [selectedColors, setSelectedColors] = useState<string[]>([]);
+    const [minPrice, setMinPrice] = useState<number>(0);
+    const [maxPrice, setMaxPrice] = useState<number>(1000); // Ajusta según tus necesidades
+
+
 
     useEffect(() => {
     
@@ -41,14 +48,184 @@ export default function Auriculares (){
   }, []);
 
    const auriculares = products.filter(cat => cat.category === 'Auriculares')
+
+   //FILTERS
+   const handleMinPriceChange = (value: number) => {
+    setMinPrice(value);
+  };
+  
+  const handleMaxPriceChange = (value: number) => {
+    setMaxPrice(value);
+  };
+
+   const handleBrandChange = (brand: string) => {
+    if (selectedBrands.includes(brand)) {
+      setSelectedBrands(selectedBrands.filter(item => item !== brand));
+    } else {
+      setSelectedBrands([...selectedBrands, brand]);
+    }
+  };
+
+  const handleColorChange = (color: string) => {
+    if (selectedColors.includes(color)) {
+      setSelectedColors(selectedColors.filter(item => item !== color));
+    } else {
+      setSelectedColors([...selectedColors, color]);
+    }
+  };
+
+  const filteredByBrand = auriculares.filter(product => {
+    if (selectedBrands.length === 0 || selectedBrands.includes(product.brand)) {
+      return true;
+    }
+    return false;
+  });
+  
+  const filteredProducts = auriculares
+  .filter(product => {
+    // Filtro por marca
+    if (selectedBrands.length === 0 || selectedBrands.includes(product.brand)) {
+      return true;
+    }
+    return false;
+  })
+  .filter(product => {
+    // Filtro por color
+    if (selectedColors.length === 0 || selectedColors.includes(product.color)) {
+      return true;
+    }
+    return false;
+  })
+  .filter(product => {
+    // Filtro por precio
+    return product.price >= minPrice && product.price <= maxPrice;
+  });
+
+
+  //FILTER BY COLOR
+
+
+  
+
+   
     
     return(
         <div>
-            {
-                auriculares.map((prod) => (
-                    <Productos product={prod} key={prod._id}/>
-                ))
-            }
+
+            <div className={style.pages_container}>
+                <div className={style.filters_container}>
+                
+                    <div style={{marginTop:30}}>
+                        <p className={style.titleFilter}>Filtrar por marca</p>
+                        <CheckboxGroup>
+                            <Checkbox
+                            value="logitech"
+                            checked={selectedBrands.includes("Logitech")}
+                            onChange={() => handleBrandChange("Logitech")} >
+                                Logitech
+                            </Checkbox>
+
+                            <Checkbox
+                            color="danger" 
+                            value="redragon"
+                            checked={selectedBrands.includes("Redragon")}
+                            onChange={() => handleBrandChange("Redragon")} >
+                                Redragon
+                            </Checkbox>
+
+                            <Checkbox
+                            color="danger" 
+                            value="hyperx"
+                            checked={selectedBrands.includes("Hyperx")}
+                            onChange={() => handleBrandChange("Hyperx")} >
+                                Hyper X
+                            </Checkbox>
+
+                        </CheckboxGroup>
+                    </div>
+                    <div style={{marginTop:30}}>
+                        <p className={style.titleFilter}>Filtrar por color</p>
+                        <CheckboxGroup>
+                            <Checkbox
+                            color="default" 
+                            value="negro"
+                            checked={selectedColors.includes("negro")}
+                            onChange={() => handleColorChange("negro")} >
+                                Negro
+                            </Checkbox>
+
+                            <Checkbox
+                            color="default" 
+                            value="gris"
+                            checked={selectedColors.includes("gris")}
+                            onChange={() => handleColorChange("gris")} >
+                                Gris
+                            </Checkbox>
+
+                            <Checkbox
+                            color="success"
+                            value="blanco"
+                            checked={selectedColors.includes("blanco")}
+                            onChange={() => handleColorChange("blanco")} >
+                                Blanco
+                            </Checkbox>
+
+                            <Checkbox
+                            value="azul"
+                            checked={selectedColors.includes("azul")}
+                            onChange={() => handleColorChange("azul")} >
+                                Azul
+                            </Checkbox>
+
+                            <Checkbox
+                            color='danger'
+                            value="rojo"
+                            checked={selectedColors.includes("rojo")}
+                            onChange={() => handleColorChange("rojo")} >
+                                Rojo
+                            </Checkbox>
+
+                            <Checkbox
+                            color='danger'
+                            value="rosa"
+                            checked={selectedColors.includes("rosa")}
+                            onChange={() => handleColorChange("rosa")} >
+                                Rosa
+                            </Checkbox>
+
+
+                        </CheckboxGroup>
+                    </div>
+                    <div style={{marginTop:30, width:'85%'}}>
+                        <p style={{textAlign:'center'}} className={style.titleFilter}>Filtrar por precio</p>
+                        <Slider
+                         value={[minPrice, maxPrice]}
+                         onChange={(newValue: number | number[]) => {
+                           if (Array.isArray(newValue)) {
+                             handleMinPriceChange(newValue[0]);
+                             handleMaxPriceChange(newValue[1]);
+                           }
+                         }}
+                        
+                         min={minPrice}
+                         max={maxPrice} // Ajusta según tus necesidades
+                         label={(value: number) => `${value}`}
+                         formatOptions={{style: "currency", currency: "USD"}}
+                         color='foreground'
+                        />
+                    </div>
+           
+                </div>
+                <div className={style.pages}>
+                    {
+                        filteredProducts.map((prod) => (
+                            <Productos product={prod} key={prod._id}/>
+                        ))
+                    }
+                </div>
+
+            </div>
+                {/* <Pagination isCompact showControls total={10} initialPage={1} /> */}
         </div>
     )
 }

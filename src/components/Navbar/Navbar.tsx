@@ -17,13 +17,14 @@ import SearchBar from '../Searchbar/Searchbar';
 
 
 const Navbar = () => {
+
+
   const [isOpen, setIsOpen] = useState(false)
-  
   const {data: session} =  useSession()
 
 
    return (
-         <nav className='navbarContainer'>
+         <nav  className='navbarContainer'>
             <div className='navbar'>
                     <div className={`nav_toggle ${isOpen && 'open'}`} onClick={() => setIsOpen(!isOpen)} >
                         <span></span>
