@@ -190,7 +190,7 @@ export default function Mouses (){
                           maxValue={maxPriceMousepads} // Ajusta según tus necesidades
                           label='Precio'
                           formatOptions={{style: "currency", currency:'ARS'}}
-                          valueLabelFormat={(value: number) => `$${value}`}
+                          
                           color='foreground'
                         />
                     </div>
