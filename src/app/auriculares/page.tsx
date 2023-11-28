@@ -74,32 +74,35 @@ export default function Auriculares (){
     }
   };
 
-  const filteredByBrand = auriculares.filter(product => {
+  const filteredByBrand = auriculares.filter((product) => {
     if (selectedBrands.length === 0 || selectedBrands.includes(product.brand)) {
       return true;
     }
     return false;
   });
-  
-  const filteredProducts = auriculares
-  .filter(product => {
-    // Filtro por marca
-    if (selectedBrands.length === 0 || selectedBrands.includes(product.brand)) {
-      return true;
-    }
-    return false;
-  })
-  .filter(product => {
-    // Filtro por color
+
+  const filteredByColor = filteredByBrand.filter((product) => {
     if (selectedColors.length === 0 || selectedColors.includes(product.color)) {
       return true;
     }
     return false;
-  })
-  .filter(product => {
+  });
+
+  const filteredProducts = filteredByColor.filter((product) => {
     // Filtro por precio
     return product.price >= minPrice && product.price <= maxPrice;
   });
+
+
+  const minPriceMousepads =
+    filteredByColor.length > 0
+      ? Math.min(...filteredByColor.map((product) => product.price))
+      : 0;
+
+  const maxPriceMousepads =
+    filteredByColor.length > 0
+      ? Math.max(...filteredByColor.map((product) => product.price))
+      : 0;
 
 
   //FILTER BY COLOR
@@ -199,19 +202,19 @@ export default function Auriculares (){
                     <div style={{marginTop:30, width:'85%'}}>
                         <p style={{textAlign:'center'}} className={style.titleFilter}>Filtrar por precio</p>
                         <Slider
-                         value={[minPrice, maxPrice]}
-                         onChange={(newValue: number | number[]) => {
-                           if (Array.isArray(newValue)) {
-                             handleMinPriceChange(newValue[0]);
-                             handleMaxPriceChange(newValue[1]);
-                           }
-                         }}
-                        
-                         minValue={minPrice}
-                         maxValue={maxPrice} // Ajusta según tus necesidades
-                         label='Precio'
-                         formatOptions={{style: "currency", currency: "USD"}}
-                         color='foreground'
+                          value={[minPrice, maxPrice]}
+                          onChange={(newValue: number | number[]) => {
+                            if (Array.isArray(newValue)) {
+                              handleMinPriceChange(newValue[0]);
+                              handleMaxPriceChange(newValue[1]);
+                            }
+                          }}
+                          minValue={minPriceMousepads}
+                          maxValue={maxPriceMousepads} // Ajusta según tus necesidades
+                          label='Precio'
+                          formatOptions={{style: "currency", currency:'ARS'}}
+                          valueLabelFormat={(value: number) => `$${value}`}
+                          color='foreground'
                         />
                     </div>
            
