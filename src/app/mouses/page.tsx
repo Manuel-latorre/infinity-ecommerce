@@ -186,7 +186,7 @@ export default function Mouses (){
                         
                          min={minPrice}
                          max={maxPrice} // Ajusta según tus necesidades
-                         label={(value: number) => `${value}`}
+                         label='Precio'
                          formatOptions={{style: "currency", currency: "USD"}}
                          color='foreground'
                         />

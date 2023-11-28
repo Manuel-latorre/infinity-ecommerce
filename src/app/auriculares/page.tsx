@@ -209,7 +209,7 @@ export default function Auriculares (){
                         
                          min={minPrice}
                          max={maxPrice} // Ajusta según tus necesidades
-                         label={(value: number) => `${value}`}
+                         label='Precio'
                          formatOptions={{style: "currency", currency: "USD"}}
                          color='foreground'
                         />
