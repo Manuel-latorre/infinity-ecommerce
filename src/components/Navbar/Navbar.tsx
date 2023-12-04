@@ -22,19 +22,19 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const {data: session} =  useSession()
 
-  const dropdownRef = useRef(null);
-  const toggleRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement | HTMLDivElement>(null);
 
   const closeDropdown = () => {
     setIsOpen(false);
   };
 
-  const handleClickOutside = (event:MouseEvent) => {
+  const handleClickOutside = (event: MouseEvent) => {
     if (
       dropdownRef.current &&
       toggleRef.current &&
-      !dropdownRef.current.contains(event.target) &&
-      !toggleRef.current.contains(event.target)
+      !dropdownRef.current.contains(event.target as Node) &&
+      !toggleRef.current.contains(event.target as Node)
     ) {
       closeDropdown();
     }
@@ -51,7 +51,7 @@ const Navbar = () => {
    return (
          <nav  className='navbarContainer'>
             <div className='navbar'>
-                    <div className={`nav_toggle ${isOpen && 'open'}`} onClick={() => setIsOpen(!isOpen)} ref={toggleRef} >
+                    <div className={`nav_toggle ${isOpen && 'open'}`} onClick={() => setIsOpen(!isOpen)} ref={toggleRef as React.RefObject<HTMLDivElement>} >
                         <span></span>
                         <span></span>
                     </div>
