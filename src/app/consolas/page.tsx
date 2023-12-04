@@ -31,7 +31,7 @@ async function fetchProducts(): Promise<Product[]> {
   }
 
 
-export default function consolas (){
+export default function Consolas (){
 
     const [products, setProducts] = useState<Product[]>([]);
     const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
