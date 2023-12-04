@@ -1,97 +1,80 @@
- 'use client'
- 
- import React, { useEffect, useState } from 'react';
- import {ScrollShadow} from "@nextui-org/react";
- import axios from 'axios';
- import Autosuggest from 'react-autosuggest';
- import Link from 'next/link';
- import style from './Searchbar.module.css';
+'use client'
 
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import style from './Searchbar.module.css';
+import { SearchIcon } from './SearchIcon';
+import { Input, ScrollShadow } from '@nextui-org/react';
 
- interface Product {
-   _id: string;
-   name: string;
-   imageCard: string;
- }
+interface Product {
+  _id: string;
+  name: string;
+  price:number;
+  imageCard: string;
+}
 
- export default function SearchBar() {
-   const [searchQuery, setSearchQuery] = useState('');
-   const [suggestions, setSuggestions] = useState<Product[]>([]);
+export default function SearchBar() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [suggestions, setSuggestions] = useState<Product[]>([]);
 
-   const fetchSuggestions = async (value: string): Promise<Product[]> => {
-     try {
-       const response = await axios.get(
-         `https://api-ecommerce-kappa.vercel.app/products/search?name=${value}`
-       );
-       return response.data;
-     } catch (error) {
-       console.error('Error al buscar productos por nombre:', error);
-       return [];
-     }
-   };
+  const fetchSuggestions = async (value: string): Promise<Product[]> => {
+    try {
+      const response = await axios.get(
+        `https://api-ecommerce-kappa.vercel.app/products/search?name=${value}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Error al buscar productos por nombre:', error);
+      return [];
+    }
+  };
 
-   const handleSearch = async (value: string) => {
-     setSearchQuery(value);
-     const products = await fetchSuggestions(value);
-     setSuggestions(products);
-   };
+  const handleSearch = async (value: string) => {
+    setSearchQuery(value);
+    const products = await fetchSuggestions(value);
+    setSuggestions(products);
+  };
 
-   const onSuggestionsFetchRequested = async ({ value }: { value: string }) => {
-     const fetchedSuggestions = await fetchSuggestions(value);
-     setSuggestions(fetchedSuggestions);
-   };
+  const handleSuggestionClick = (suggestion: Product) => {
+    window.location.href = `/products/${suggestion._id}`;
+  };
 
-   const onSuggestionsClearRequested = () => {
-     setSuggestions([]);
-   };
+  useEffect(() => {
+    handleSearch('');
+  }, []);
 
-   const getSuggestions = (value: string) => {
-     const inputValue = value.trim().toLowerCase();
-     const inputLength = inputValue.length;
-     return inputLength === 0 ? [] : suggestions.filter(
-       product => product.name.toLowerCase().slice(0, inputLength) === inputValue
-     );
-   };
+  return (
+    <div className={style.searchbarComponent}>
+    <Input
+      // classNames={{
+      //   base: "max-w-full sm:max-w-[10rem] h-10",
+      //   mainWrapper: "h-full",
+      //   input: "text-small",
+      //   inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+      // }}
+      value={searchQuery}
+      onChange={(e) => handleSearch(e.target.value)}
+      placeholder="Buscar..."
+      size="sm"
+      startContent={<SearchIcon size={18} />}
+      type="search"
+    />
 
-   const renderSuggestion = (suggestion: Product) => (
-     <div className={style.result_container}>
-        <div className={style.result} onClick={() => handleSuggestionClick(suggestion)}>
-          {suggestion.name}
-          <img width={80} src={suggestion.imageCard} alt="" />
-        </div>
-      </div>
-   );
-
-   const handleSuggestionClick = (suggestion: Product) => {
-//     // Redirige manualmente al usuario al detalle del producto
-     window.location.href = `/products/${suggestion._id}`;
-   };
-
-   useEffect(() => {
-     handleSearch('');
-   }, []);
-
-   return (
-      
-     <div className={style.searchbarComponent}>
-        <Autosuggest
-          suggestions={getSuggestions(searchQuery)}
-          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={onSuggestionsClearRequested}
-          getSuggestionValue={(suggestion) => suggestion.name}
-          renderSuggestion={renderSuggestion}
-          inputProps={{
-           placeholder: 'Buscar...',
-           value: searchQuery,
-           onChange: (e, { newValue }) => {
-             handleSearch(newValue);
-           },
-           className: style.searchbar,
-          }}
-          />
-
-     </div>
-      
-   );
- }
-
+    {searchQuery.length > 0 && suggestions.length > 0 && (
+      <ul className={style.resultsSearch}>
+        {suggestions.map((item) => (
+          <li key={item._id} onClick={() => handleSuggestionClick(item)}>
+            <div className={style.result}>
+              <div style={{display:'flex', flexDirection:'column'}}>
+                <p>{item.name}</p>
+                <p style={{color: 'black'}}>${item.price}</p>
+              </div>
+              <img width={80} src={item.imageCard} alt="" />
+            </div>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+  );
+}

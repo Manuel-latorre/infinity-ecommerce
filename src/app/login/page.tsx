@@ -1,12 +1,14 @@
 'use client'
 
-import { Input } from "@nextui-org/react";
+import { Input, Button } from "@nextui-org/react";
 import { FormEvent, useState } from "react";
 import { signIn } from 'next-auth/react'
 import { useRouter } from "next/navigation";
+import { League_Spartan } from "next/font/google";
+import style from './Login.module.css'
+import Link from "next/link";
 
-
-
+const spartan =  League_Spartan({ subsets: ['latin'], weight:['600'] })
 
 export default function LoginPage() {
 
@@ -32,18 +34,23 @@ export default function LoginPage() {
 
 
   return (
-    <div className="flex h-screen items-center justify-center">
-      <form onSubmit={handleSubmit} className="w-full max-w-xs">
+    <div className={spartan.className}>
+      <div className={style.login}>
+        <div className={style.login_container}>
+          <form onSubmit={handleSubmit} className={style.form}>
+            <p className={style.signIn}>Iniciar sesión</p>
 
-        { error && <div className="bg-red-500 text-white p-2 mb-2"> {error} </div> }
 
-        <h1 className="text-2xl mb-2 text-center">Sign In</h1>
 
-        <Input isRequired type="email" label="Email" placeholder="Email" name="email" className="mb-2" />
-        <Input isRequired type="password" label="Password" placeholder="*****" name="password" className="mb-2" />
+            <Input isRequired type="email" label="Email" placeholder="Email" name="email" className="mb-2" />
+            { error && <div className={style.errors}> {error} </div> }
+            <Input isRequired type="password" label="Password" placeholder="*****" name="password" className="mb-2" />
 
-        <button>Login</button>
-      </form>
+            <button className={style.submit}>Iniciar</button>
+          
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

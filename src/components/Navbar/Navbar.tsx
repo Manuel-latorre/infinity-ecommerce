@@ -1,16 +1,16 @@
 'use client'
 
-import React, {useState, useEffect} from 'react'
+import React, {useEffect, useRef, useState } from 'react'
 import {DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, Button} from "@nextui-org/react";
 import { useSession } from "next-auth/react";
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import logo from '../assets/logoInfinit1.svg'
-import Cart from '../Cart/Cart';
-import './Navbar.css'
 import CartView from '../Cart/CartView';
 import SearchBar from '../Searchbar/Searchbar';
+import ArrowIcon from './ArrowIcon'
+import './Navbar.css'
 
 
 
@@ -22,11 +22,36 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const {data: session} =  useSession()
 
+  const dropdownRef = useRef(null);
+  const toggleRef = useRef(null);
+
+  const closeDropdown = () => {
+    setIsOpen(false);
+  };
+
+  const handleClickOutside = (event:MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      toggleRef.current &&
+      !dropdownRef.current.contains(event.target) &&
+      !toggleRef.current.contains(event.target)
+    ) {
+      closeDropdown();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+  
 
    return (
          <nav  className='navbarContainer'>
             <div className='navbar'>
-                    <div className={`nav_toggle ${isOpen && 'open'}`} onClick={() => setIsOpen(!isOpen)} >
+                    <div className={`nav_toggle ${isOpen && 'open'}`} onClick={() => setIsOpen(!isOpen)} ref={toggleRef} >
                         <span></span>
                         <span></span>
                     </div>
@@ -37,10 +62,10 @@ const Navbar = () => {
                         </a>
                     </div>
 
-                    <div  className={`nav_items ${isOpen && 'open'}`}>
+                    <div  className={`nav_items ${isOpen && 'open'}`} ref={dropdownRef}>
                         <Link href='/'>
                           Inicio
-                        </Link>
+                        </Link>   
                         <Link href='/teclados'>
                           Teclados
                         </Link>
@@ -53,6 +78,21 @@ const Navbar = () => {
                         <Link href='/mousepads'>
                           Mousepads
                         </Link>
+                        <Dropdown backdrop="blur">
+                          <DropdownTrigger>
+                            <Button variant='light'>
+                              
+                              <p style={{fontSize:16}}> Play Station</p>
+                              <ArrowIcon/>
+                            </Button>
+                          
+                        </DropdownTrigger>
+                        <DropdownMenu variant="faded" aria-label="Static Actions">
+                          <DropdownItem variant='flat' color='success' key="new"><Link href='/sony'>Ver todo</Link></DropdownItem>
+                          <DropdownItem variant='flat' color='secondary' key="copy"><Link href='/joysticks'>Joysticks</Link></DropdownItem>
+                          <DropdownItem variant='flat' color='warning' key="edit"><Link href='/consolas'>Consolas</Link></DropdownItem>
+                        </DropdownMenu>
+                      </Dropdown>
                     </div>
 
                     {

@@ -83,6 +83,8 @@ export default function CartView() {
     };
   }, []);
 
+  
+
 
 
   const totalItems = products.length;

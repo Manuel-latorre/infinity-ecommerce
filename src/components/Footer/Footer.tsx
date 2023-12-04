@@ -1,11 +1,13 @@
 'use client'
 
 import {Accordion, AccordionItem} from "@nextui-org/react";
+import { League_Spartan } from "next/font/google";
 import Image from 'next/image'
 import style from './Footer.module.css'
 import logo from '../assets/logoInfinit1.svg'
 import Link from 'next/link'
 
+const spartan =  League_Spartan({ subsets: ['latin'], weight:['600'] })
 
 export default function Footer(){
     return (
@@ -41,7 +43,7 @@ export default function Footer(){
             <div style={{width:'95%', margin:'auto', borderTop:'1px solid #191919', marginTop:10}}>
                 <Accordion isCompact>
                     <AccordionItem className={style.custom_accordion_title} key="1" aria-label="Accordion 1" title="Politícas de privacidad">
-                        <p style={{color:'gray', marginTop:20}}>© 2023 Inifinity Game. Todos los derechos reservados. El contenido, diseño y elementos visuales de este sitio web están protegidos por las leyes de derechos de autor y otras leyes de propiedad intelectual. Queda estrictamente prohibida la reproducción, distribución, o cualquier uso no autorizado de cualquier parte de este sitio sin permiso previo por escrito. Todas las marcas comerciales, logotipos y nombres de productos mencionados en este sitio son propiedad de sus respectivos propietarios y se utilizan únicamente con fines ilustrativos. Cualquier uso no autorizado de estas marcas comerciales está estrictamente prohibido. Si tienes alguna pregunta o necesitas permiso para utilizar nuestro contenido, por favor contáctanos a infinity.com o +54123123123. Gracias por visitar nuestro sitio y por respetar nuestros derechos de propiedad intelectual.</p>
+                        <p style={{color:'gray', marginTop:20}} className={spartan.className}>© 2023 Inifinity Game. Todos los derechos reservados. El contenido, diseño y elementos visuales de este sitio web están protegidos por las leyes de derechos de autor y otras leyes de propiedad intelectual. Queda estrictamente prohibida la reproducción, distribución, o cualquier uso no autorizado de cualquier parte de este sitio sin permiso previo por escrito. Todas las marcas comerciales, logotipos y nombres de productos mencionados en este sitio son propiedad de sus respectivos propietarios y se utilizan únicamente con fines ilustrativos. Cualquier uso no autorizado de estas marcas comerciales está estrictamente prohibido. Si tienes alguna pregunta o necesitas permiso para utilizar nuestro contenido, por favor contáctanos a infinity.com o +54123123123. Gracias por visitar nuestro sitio y por respetar nuestros derechos de propiedad intelectual.</p>
                     </AccordionItem>
                 </Accordion>
             </div>
