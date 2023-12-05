@@ -46,17 +46,11 @@ export default function SearchBar() {
   return (
     <div className={style.searchbarComponent}>
     <Input
-      // classNames={{
-      //   base: "max-w-full sm:max-w-[10rem] h-10",
-      //   mainWrapper: "h-full",
-      //   input: "text-small",
-      //   inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
-      // }}
       value={searchQuery}
       onChange={(e) => handleSearch(e.target.value)}
       placeholder="Buscar..."
       size="sm"
-      startContent={<SearchIcon size={18} />}
+      startContent={<SearchIcon size={18} width={undefined} height={undefined} />}
       type="search"
     />
 
