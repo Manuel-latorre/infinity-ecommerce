@@ -64,3 +64,15 @@
     padding: 10px;
   }
   
+
+  @media(max-width:1470px){
+    .card{
+      width: 280px;
+    }
+  }
+
+  @media(max-width:1083px){
+    .card{
+      width: 220px;
+    }
+  }

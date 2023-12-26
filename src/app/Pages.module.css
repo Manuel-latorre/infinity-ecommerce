@@ -50,3 +50,43 @@
         background-position: 0% 50%;
     }
 }
+
+
+/* .buttonFilter{
+   display: flex;
+   justify-content: center;
+   margin: 50px;
+   align-items: center;
+} */
+
+.buttonFilter{
+    display: none;
+}
+
+@media(max-width:1314px){
+    .filters_container{
+        width: 40%;
+    }
+}
+
+@media(max-width:1083px){
+    .filters_container{
+        display: none;
+    }
+    .buttonFilter{
+        display: flex;
+        justify-content: center;
+        /* margin: 50px; */
+        align-items: center;
+        position: sticky;
+        top: 168px;
+        background-color: rgb(255, 255, 255);
+        height: 100px;
+        margin-bottom: 30px;
+     }
+    .pages{
+        width: 100%;
+        margin: auto;
+        justify-content: center;
+    }
+}

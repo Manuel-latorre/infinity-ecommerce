@@ -10,6 +10,7 @@ import mp from '../../../components/assets/mp.png'
 import visa from '../../../components/assets/visa.png'
 import mastercard from '../../../components/assets/mastercard.png'
 import ButtonPay from "@/components/ButtonPay/ButtonPay";
+import { useEffect, useState } from "react";
 
 
 
@@ -59,6 +60,11 @@ export default async function DetailProduct({ params }: any) {
         }
       }
 
+
+      
+      
+    
+    
     return (
         <div style={{backgroundColor:'#fff', color:'black'}}>
             <div className={style.detailContainer}>
@@ -105,6 +111,7 @@ export default async function DetailProduct({ params }: any) {
                         <Image width={40} src={visa} alt="visa"/>
                         <Image width={40} src={mastercard} alt="mastercard"/>
                     </div>
+
 
                     <div style={{display:'flex', flexDirection:'column', marginTop: 20, gap:15}}>
                         <ButtonPay/>

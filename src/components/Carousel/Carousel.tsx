@@ -24,9 +24,6 @@ export default function Carousel() {
       modules={[Pagination, Autoplay]}  
       className="mySwiper">
         <SwiperSlide>
-            <Image src={ps5} alt="ps5"/>
-        </SwiperSlide>
-        <SwiperSlide>
             <Image src={hyperx} alt="hyperx"/>
         </SwiperSlide>
         <SwiperSlide>
@@ -34,6 +31,9 @@ export default function Carousel() {
         </SwiperSlide>
         <SwiperSlide>
             <Image src={logitech} alt="logitech"/>
+        </SwiperSlide>
+        <SwiperSlide>
+            <Image src={ps5} alt="ps5"/>
         </SwiperSlide>
       </Swiper>
     </>
