@@ -6,9 +6,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 50px;
+    margin-top: 50px;
     border-radius: 10px;
-    padding: 10px;
+    /* padding: 10px; */
 }
 
 .detailContainer{

@@ -10,7 +10,7 @@ import mp from '../../../components/assets/mp.png'
 import visa from '../../../components/assets/visa.png'
 import mastercard from '../../../components/assets/mastercard.png'
 import ButtonPay from "@/components/ButtonPay/ButtonPay";
-import { useEffect, useState } from "react";
+
 
 
 
